@@ -7,7 +7,7 @@
 // ----------------------------------------------------------------------------------------------------
 // @return $string | write json to path
 
-@mixin SassyExport($path, $map, $pretty: false, $debug: false) {
+@mixin SassyExport($path, $map, $pretty: false, $debug: false, $varname: "") {
     @at-root {
         @if $debug {
             SassyExport {

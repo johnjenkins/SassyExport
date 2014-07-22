@@ -21,7 +21,7 @@ end
 # @return string | write json to path
 
 module Sass::Script::Functions
-    def SassyExport(path, map, pretty, debug)
+    def SassyExport(path, map, pretty, debug, varname)
 
         def opts(value)
             value.options = options
@@ -101,6 +101,7 @@ module Sass::Script::Functions
         assert_type map, :Map, :map
         assert_type pretty, :Bool, :pretty
         assert_type debug, :Bool, :debug
+        assert_type varname, :String, :varname
 
         # parse to bool
         pretty = pretty.to_bool
@@ -122,8 +123,13 @@ module Sass::Script::Functions
         # recursive convert map to hash
         hash = recurs_to_h(map)
 
+
+
         # convert hash to pretty json if pretty
         pretty ? json = JSON.pretty_generate(hash) : json = JSON.generate(hash)
+
+        # if we're turning it straight to js put a variable name in front
+        json = varname.length > 0 ? "var " + varname + "=" + json : json
 
         # open file [create new file if file does not exist], write string to root/path/to/filename.json
         File.open("#{dir_path}", "w") { |f| f.write(json) }
