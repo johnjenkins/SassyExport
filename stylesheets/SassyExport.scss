@@ -11,11 +11,11 @@
     @at-root {
         @if $debug {
             SassyExport {
-                content: "#{SassyExport($path, $map, $pretty, $debug)}";
+                content: "#{SassyExport($path, $map, $pretty, $debug, $varname)}";
             }
         } @else {
             %SassyExport {
-                /* #{SassyExport($path, $map, $pretty, $debug)} */
+                /* #{SassyExport($path, $map, $pretty, $debug, $varname)} */
             }
         }
     }

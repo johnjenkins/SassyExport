@@ -17,6 +17,7 @@ end
 # @param map [map] : map to convert to json
 # @param pretty [bool] : pretty print json
 # @param debug [bool] : print debug string with path
+# @param varname [string] : js variable name
 # ----------------------------------------------------------------------------------------------------
 # @return string | write json to path
 
@@ -113,6 +114,9 @@ module Sass::Script::Functions
         # define dir path
         dir_path = root
         dir_path += unquote(path).to_s
+
+        #sortout varname
+        varname = unquote(varname).to_s
 
         # normalize windows path
         dir_path = Sass::Util.pathname(dir_path)
